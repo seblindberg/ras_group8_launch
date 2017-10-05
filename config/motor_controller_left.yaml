@@ -1,2 +1,2 @@
-motor_topic: /motorcontrol_left/cmd_vel
-encoder_topic: /motorcontrol_right/encoder
+motor_topic: /motor_left/motorcontrol/cmd_vel
+encoder_topic: /motor_left/motorcontrol/encoder
