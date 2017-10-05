@@ -1,0 +1,22 @@
+<launch>
+
+  <!-- Launch the left motor node -->
+  <group ns="motor_left">
+    <!--<remap from="/motorcontrol/encoder" to="/motorcontrol_left/encoder"/>
+    <remap from="/motorcontrol/cmd_vel" to="/motorcontrol_left/cmd_vel"/>-->
+    
+    <node name="phidgets_motor_controller"
+           pkg="phidgets"
+          type="motor"
+          args="475406">
+    </node>
+    
+    <node name="motor_controller_left"
+           pkg="ras_group8_motor_controller"
+          type="ras_group8_motor_controller">
+      <rosparam command="load" file="$(find ras_group8_motor_controller)/config/default.yaml" />
+      <rosparam command="load" file="$(find ras_group8_launch)/config/motor_controller_left.yaml" />
+    </node>
+  </group>
+
+</launch>
