@@ -1,16 +1,25 @@
 <launch>
+  
+  <!-- Bring up the platform package -->
+  <node name="platform"
+         pkg="ras_group8_platform"
+        type="ras_group8_platform">
+    <rosparam command="load" file="$(find ras_group8_platform)/config/default.yaml" />
+  </node>
 
   <!-- Launch the left motor node -->
   <group ns="motor_left">
     <node name="phidgets"
            pkg="phidgets"
           type="motor"
-          args="_serial:=473021">
+          args="_serial:=473021"
+       respawn="true">
     </node>
     
     <node name="controller"
            pkg="ras_group8_motor_controller"
-          type="ras_group8_motor_controller">
+          type="ras_group8_motor_controller"
+      required="true">
       <rosparam command="load" file="$(find ras_group8_motor_controller)/config/default.yaml" />
       <rosparam command="load" file="$(find ras_group8_launch)/config/motor_controller_left.yaml" />
     </node>
@@ -20,12 +29,14 @@
     <node name="phidgets"
            pkg="phidgets"
           type="motor"
-          args="_serial:=475406" output="screen">
+          args="_serial:=475406"
+       respawn="true">
     </node>
     
     <node name="controller"
            pkg="ras_group8_motor_controller"
-          type="ras_group8_motor_controller">
+          type="ras_group8_motor_controller"
+      required="true" output="screen">
       <rosparam command="load" file="$(find ras_group8_motor_controller)/config/default.yaml" />
       <rosparam command="load" file="$(find ras_group8_launch)/config/motor_controller_right.yaml" />
     </node>
