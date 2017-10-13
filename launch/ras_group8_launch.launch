@@ -41,5 +41,11 @@
       <rosparam command="load" file="$(find ras_group8_launch)/config/motor_controller_right.yaml" />
     </node>
   </group>
-
+  
+  <!-- Launch the cartesian controller -->
+  <node name="cartesian_controller"
+         pkg="ras_group8_cartesian_controller"
+        type="ras_group8_cartesian_controller">
+    <rosparam command="load" file="$(find ras_group8_cartesian_controller)/config/default.yaml" />
+  </node>
 </launch>
