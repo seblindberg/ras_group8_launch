@@ -1,3 +1,4 @@
 motor_topic: /motor_right/motorcontrol/cmd_vel
 encoder_topic: /motor_right/motorcontrol/encoder
 reverse_direction: true
+#wheel_encoder_tics_per_rev: 1185.36
