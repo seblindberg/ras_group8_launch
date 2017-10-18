@@ -1,51 +1,31 @@
 <launch>
-  
-  <!-- Bring up the platform package -->
-  <node name="platform"
-         pkg="ras_group8_platform"
-        type="ras_group8_platform">
-    <rosparam command="load" file="$(find ras_group8_platform)/config/default.yaml" />
-  </node>
+  <!-- Launch the platform node -->
+  <include file="$(find ras_group8_platform)/launch/ras_group8_platform.launch" />
 
   <!-- Launch the left motor node -->
   <group ns="motor_left">
-    <node name="phidgets"
-           pkg="phidgets"
-          type="motor"
-          args="_serial:=473021"
-       respawn="true">
-    </node>
-    
-    <node name="controller"
-           pkg="ras_group8_motor_controller"
-          type="ras_group8_motor_controller"
-      required="true">
-      <rosparam command="load" file="$(find ras_group8_motor_controller)/config/default.yaml" />
-      <rosparam command="load" file="$(find ras_group8_launch)/config/motor_controller_left.yaml" />
-    </node>
+    <include file="$(find ras_group8_motor_controller)/launch/ras_group8_motor_controller.launch">
+      <arg name="phidgets_serial" value="473021" />
+      <!-- Overload parameters specific to the left motor -->
+      <rosparam command="load"
+        file="$(find ras_group8_launch)/config/motor_controller_right.yaml"
+        ns="controller" />
+    </include>
   </group>
 
   <group ns="motor_right">
-    <node name="phidgets"
-           pkg="phidgets"
-          type="motor"
-          args="_serial:=475406"
-       respawn="true">
-    </node>
-    
-    <node name="controller"
-           pkg="ras_group8_motor_controller"
-          type="ras_group8_motor_controller"
-      required="true" output="screen">
-      <rosparam command="load" file="$(find ras_group8_motor_controller)/config/default.yaml" />
-      <rosparam command="load" file="$(find ras_group8_launch)/config/motor_controller_right.yaml" />
-    </node>
+    <include file="$(find ras_group8_motor_controller)/launch/ras_group8_motor_controller.launch">
+      <arg name="phidgets_serial" value="475406" />
+      <!-- Overload parameters specific to the left motor -->
+      <rosparam command="load"
+        file="$(find ras_group8_launch)/config/motor_controller_right.yaml"
+        ns="controller" />
+    </include>
   </group>
   
   <!-- Launch the cartesian controller -->
-  <node name="cartesian_controller"
-         pkg="ras_group8_cartesian_controller"
-        type="ras_group8_cartesian_controller">
-    <rosparam command="load" file="$(find ras_group8_cartesian_controller)/config/default.yaml" />
-  </node>
+  <include file="$(find ras_group8_cartesian_controller)/launch/ras_group8_cartesian_controller.launch" />
+  
+  <!-- Launch the odometry -->
+  <include file="$(find ras_group8_odometry)/launch/ras_group8_odometry.launch" />
 </launch>
