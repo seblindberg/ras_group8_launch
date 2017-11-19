@@ -28,4 +28,7 @@
   
   <!-- Launch the odometry -->
   <include file="$(find ras_group8_odometry)/launch/ras_group8_odometry.launch" />
+  
+  <!-- Launch the map -->
+  <include file="$(find ras_group8_map)/launch/ras_group8_map.launch" />
 </launch>
