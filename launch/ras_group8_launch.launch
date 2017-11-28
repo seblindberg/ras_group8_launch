@@ -13,6 +13,7 @@
     </include>
   </group>
 
+  <!-- Launch the right motor node -->
   <group ns="motor_right">
     <include file="$(find ras_group8_motor_controller)/launch/ras_group8_motor_controller.launch">
       <arg name="phidgets_serial" value="475406" />
